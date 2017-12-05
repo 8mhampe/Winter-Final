@@ -11,6 +11,10 @@ function Device(t,ma,c){
     this.rate = [0.0015,0.0235,0.23];
 
     //Instance Functions
+    this.power = function(){
+        return this.juice;
+    };
+
     this.on = function(){
         if(this.state == "off" && this.juice >0){
            this.state = "idle";
@@ -38,7 +42,13 @@ function Device(t,ma,c){
 
     this.use = function(min){
         if(this.state == "off"){
-          
+            this.juice = this.juice - (this.rate[0]*min)
+        }
+        else if(this.state == "idle"){
+            this.juice = this.juice - (this.rate[1]*min)
+        }
+        else if(this.state == "active"){
+            this.juice = this.juice - (this.rate[2]*min)
         }
     };
 
