@@ -1,29 +1,41 @@
-//defines how all charging stations work.
+
 function ChargingDock(){
 
-//Instance variables
-    this.ports; //finish from instructions
-    this.leds; //finish from instructions
+    this.ports = [undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined];
+    this.leds=["red","red","red","red","red","red","red","red"];
 
-
-//Instance Fucntions
     this.plug = function(dvc){
-        //type in here
+        for(let r=0; r<= this.leds.length; r++){
+          if(this.leds[r] == "red"){
+            this.ports[r] = dvc;
+            if(this.juice<0.99){ //ask if it needs to be this.juice.dvc or not
+              this.leds[r] = "yellow"
+            }
+            else{
+              this.leds[r] = "green"
+            }
+          }
+        }
     };
 
     this.unplug = function(dvcIdx){
-        //type in here
+      if(this.leds[dvcIdx] == !"red"){
+        let temp = this.ports[dvcIdx];
+        this.ports[dvcIdx] = undefined;
+        this.leds[dvcIdx] = "red";
+      }
     };
 
     this.chargeAll = function(min){
-        //type in here
+
     };
 
 
 }
 
-//defines the testing code
-function main(){}
 
-//runs the main code
+function main(){
+
+}
+
 main();

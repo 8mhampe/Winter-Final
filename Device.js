@@ -1,4 +1,3 @@
-//Defines how all Devices with work.
 
 function Device(t,ma,c){
 
@@ -28,11 +27,11 @@ function Device(t,ma,c){
         this.state = "off";
     };
 
-  /*  this.wake = function(){
-        if(this.state == "idle" && this.juice >0){
+    this.wake = function(){
+        if(!(this.state == "active")){
           this.state = "active"
         }
-    };  */
+    };
 
     this.sleep = function(){
         if(this.state == "active"){
@@ -54,23 +53,34 @@ function Device(t,ma,c){
 
     this.charge = function(min){
         //adds more electricity to the device's juice depending on its state
+        let charge = (this.millAmps / this.capacity);
+        let time = min / 60;
         if(this.state == "off"){
-            let charge = (this.millAmps / this.capacity);
             let output = 1 - this.rate[0];
-            let time = min / 60;
-            this.juice = this.juice + charge*output*time;
         }
-        else if(){}
-        else if(){}
-
+        else if(this.state == "idle"){
+            let output = 1 - this.rate[1];
+        }
+        else if(this.state == "active"){
+            let output = 1 - this.rate[2];
+        }
+        this.juice = this.juice + charge*output*time;
         //resets juice to 1 if it has exceeded 1
-        if(){}
+        if(this.juice > 1){
+            this.juice = 1;
+        }
 
     };
 
 }//end of the device declaration
 
 //defines the testing code.
-function main(){}
+function main(){
+  let dvc1 = new Device("phone",1500,10000)
+  
+
+}
 //runs the testing code.
 main();
+
+console.log(main());
