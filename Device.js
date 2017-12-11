@@ -57,12 +57,15 @@ function Device(t,ma,c){
         let time = min / 60;
         if(this.state == "off"){
             let output = 1 - this.rate[0];
+            return output;
         }
         else if(this.state == "idle"){
             let output = 1 - this.rate[1];
+            return output;
         }
         else if(this.state == "active"){
             let output = 1 - this.rate[2];
+            return output;
         }
         this.juice = this.juice + charge*output*time;
         //resets juice to 1 if it has exceeded 1
@@ -75,12 +78,6 @@ function Device(t,ma,c){
 }//end of the device declaration
 
 //defines the testing code.
-function main(){
-  let dvc1 = new Device("phone",1500,10000)
-  
-
-}
+function main(){}
 //runs the testing code.
 main();
-
-console.log(main());
