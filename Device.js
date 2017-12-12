@@ -49,24 +49,24 @@ function Device(t,ma,c){
         else if(this.state == "active"){
             this.juice = this.juice - (this.rate[2]*min)
         }
+        if()
     };
 
     this.charge = function(min){
         //adds more electricity to the device's juice depending on its state
         let charge = (this.millAmps / this.capacity);
         let time = min / 60;
+        let output;
         if(this.state == "off"){
-            let output = 1 - this.rate[0];
-            return output;
+            output = 1 - this.rate[0];
         }
         else if(this.state == "idle"){
-            let output = 1 - this.rate[1];
-            return output;
+            output = 1 - this.rate[1];
         }
         else if(this.state == "active"){
-            let output = 1 - this.rate[2];
-            return output;
+            output = 1 - this.rate[2];
         }
+        return output
         this.juice = this.juice + charge*output*time;
         //resets juice to 1 if it has exceeded 1
         if(this.juice > 1){
@@ -74,10 +74,26 @@ function Device(t,ma,c){
         }
 
     };
-
 }//end of the device declaration
 
 //defines the testing code.
-function main(){}
+function main(){
+  let flemphone = new Device("phone",3000,10000);
+    console.log(flemphone.power());
+    flemphone.on();
+    flemphone.wake();
+    flemphone.use(90);
+    console.log(flemphone.power());
+    flemphone.sleep();
+    flemphone.use(300);
+    console.log(flemphone.power());
+    flemphone.off();
+    flemphone.use(300);
+    console.log(flemphone.power());
+    flemphone.charge(60);
+    console.log(flemphone.power());
+    flemphone.charge(1000);
+    console.log(flemphone.power());
+}
 //runs the testing code.
 main();
