@@ -1,3 +1,4 @@
+const Device = require("./Device.js");
 
 function ChargingDock(){
 
@@ -5,10 +6,10 @@ function ChargingDock(){
     this.leds=["red","red","red","red","red","red","red","red"];
 
     this.plug = function(dvc){
-        for(let r=0; r<= this.leds.length; r++){
+        for(let r=0; r<8; r++){
           if(this.leds[r] == "red"){
             this.ports[r] = dvc;
-            if(this.juice<0.99){ //ask if it needs to be this.juice.dvc or not
+            if(this.ports[r].juice<0.99){ 
               this.leds[r] = "yellow"
             }
             else{
@@ -28,11 +29,11 @@ function ChargingDock(){
     };
 
     this.chargeAll = function(min){
-      for(let c=0; c<=this.leds.length; c++){
+      for(let c=0; c<8; c++){
         if(!(this.leds[c] == "red")){
-          this.ports[c].charge(min)
+          this.ports[c].charge(min);
         }
-        if(this.juice[c] > .99){
+        if(this.ports[c].juice > 0.99){
           this.leds[c] = "green";
         }
       }

@@ -1,4 +1,3 @@
-
 function Device(t,ma,c){
 
     //Instance Variables
@@ -99,3 +98,4 @@ function main(){
 }
 //runs the testing code.
 main();
+module.exports = Device;
